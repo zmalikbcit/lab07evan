@@ -25,13 +25,13 @@ public final class Library
      * @param name         the library's name
      * @param initialBooks the starting catalog
      */
-    public Library(final String     name,
+    public Library(final String name,
                    final List<Book> initialBooks)
     {
         validateName(name);
         validateInitialBooks(initialBooks);
 
-        this.name    = name;
+        this.name = name;
         this.catalog = new ArrayList<>(initialBooks);
     }
 
@@ -79,7 +79,7 @@ public final class Library
         }
     }
 
-    /*
+    /**
      * @throws IllegalArgumentException if initialBooks is null
      */
     private static void validateInitialBooks(final List<Book> initialBooks)
@@ -90,7 +90,7 @@ public final class Library
         }
     }
 
-    /*
+    /**
      * @throws IllegalArgumentException if book is null
      */
     private static void validateBook(final Book book)
@@ -101,11 +101,11 @@ public final class Library
         }
     }
 
-    // Task 5 — Static Nested Class
+    // Task 5 - Static Nested Class
 
     /**
      * Provides catalog statistics.
-     * Static — no {@link Library} instance is needed to instantiate it.
+     * Static - no {@link Library} instance is needed to instantiate it.
      */
     public static final class LibraryStats
     {
@@ -153,11 +153,11 @@ public final class Library
         }
     }
 
-    // Task 6 — Non-Static Inner Class
+    // Task 6 - Non-Static Inner Class
 
     /**
      * A librarian who works at the enclosing {@link Library}.
-     * Non-static — holds an implicit reference to the outer instance,
+     * Non-static - holds an implicit reference to the outer instance,
      * allowing direct access to its private fields.
      */
     public final class Librarian

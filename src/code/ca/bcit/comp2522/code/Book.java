@@ -19,30 +19,30 @@ public final class Book
 
     private final String title;
     private final String genre;
-    private final int    yearPublished;
-    private final int    pageCount;
+    private final int yearPublished;
+    private final int pageCount;
 
     /**
      * Constructs a Book with the given details.
      *
-     * @param title         the book's title
-     * @param genre         the genre; must be one of {@link #GENRE_FICTION},
+     * @param title the book's title
+     * @param genre the genre; must be one of {@link #GENRE_FICTION},
      *                      {@link #GENRE_NONFICTION}, or {@link #GENRE_REFERENCE}
      * @param yearPublished the year published
-     * @param pageCount     the number of pages
+     * @param pageCount the number of pages
      */
     public Book(final String title,
                 final String genre,
-                final int    yearPublished,
-                final int    pageCount)
+                final int yearPublished,
+                final int pageCount)
     {
         validateTitle(title);
         validateGenre(genre);
 
-        this.title         = title;
-        this.genre         = genre;
+        this.title = title;
+        this.genre = genre;
         this.yearPublished = yearPublished;
-        this.pageCount     = pageCount;
+        this.pageCount = pageCount;
     }
 
     /**
@@ -54,10 +54,10 @@ public final class Book
     {
         validateSource(source);
 
-        this.title         = source.title;
-        this.genre         = source.genre;
+        this.title = source.title;
+        this.genre = source.genre;
         this.yearPublished = source.yearPublished;
-        this.pageCount     = source.pageCount;
+        this.pageCount = source.pageCount;
     }
 
     /**
@@ -108,13 +108,13 @@ public final class Book
     @Override
     public String toString()
     {
-        return title        +
-                " ["  + genre        +
+        return title +
+                " ["  + genre +
                 ", "  + yearPublished +
-                ", "  + pageCount    + " pages]";
+                ", "  + pageCount + " pages]";
     }
 
-    /*
+    /**
      * Validates that title is not null or blank.
      *
      * @param title the title to check
@@ -128,7 +128,7 @@ public final class Book
         }
     }
 
-    /*
+    /**
      * Validates that genre is one of the three accepted constants.
      *
      * @param genre the genre to check
@@ -147,7 +147,7 @@ public final class Book
         }
     }
 
-    /*
+    /**
      * Validates that source is not null.
      *
      * @param source the source Book to check

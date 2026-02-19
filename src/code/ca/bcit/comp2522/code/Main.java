@@ -39,12 +39,12 @@ public final class Main
                 b.getPageCount()      + " pages");
     }
 
-    // ── Task 4 ───────────────────────────────────────────────────────────────
+    // Task 4
 
     /**
      * Applies {@code action} to every element in {@code list}.
      * The wildcard {@code ? extends T} is required because generics are
-     * invariant — {@code List<Book>} is not a subtype of {@code List<Object>}.
+     * invariant - {@code List<Book>} is not a subtype of {@code List<Object>}.
      *
      * @param <T>    the element type consumed by the action
      * @param list   the list to iterate
@@ -59,7 +59,7 @@ public final class Main
         }
     }
 
-    // ── Task 7 ───────────────────────────────────────────────────────────────
+    // Task 7
 
     /**
      * Demonstrates a local inner class by printing a checkout receipt.
@@ -70,7 +70,7 @@ public final class Main
     private static void processCheckout(final ca.bcit.comp2522.code.Library lib,
                                         final ca.bcit.comp2522.code.Book book)
     {
-        // CheckoutReceipt captures lib and book — both are effectively final
+        // CheckoutReceipt captures lib and book, both are final
         class CheckoutReceipt
         {
             void print()
@@ -86,7 +86,7 @@ public final class Main
         receipt.print();
     }
 
-    // ── Sample data ──────────────────────────────────────────────────────────
+    // Sample data
 
     private static ca.bcit.comp2522.code.Library sampleLibrary()
     {
@@ -103,10 +103,8 @@ public final class Main
         return new ca.bcit.comp2522.code.Library("BCIT Digital Library", books);
     }
 
-    // ── main ─────────────────────────────────────────────────────────────────
-
     /**
-     * Entry point — runs all eight tasks in order.
+     * Entry point, runs all eight tasks in order.
      *
      * @param args command-line arguments (unused)
      */
@@ -118,53 +116,49 @@ public final class Main
         library = sampleLibrary();
         catalog = library.getCatalog();
 
-        // ════════════════════════════════════════════════════════════════
-        // Task 1 — Four Types of Method References
-        // ════════════════════════════════════════════════════════════════
+        // Task 1 - Four Types of Method References
         System.out.println("Task 1: Four Types of Method References");
         System.out.println(SEPARATOR);
 
-        // Type 1 — Static: Main::printBook replaces b -> Main.printBook(b)
+        // Type 1 - Static: Main::printBook replaces b -> Main.printBook(b)
         final Consumer<ca.bcit.comp2522.code.Book> staticRef;
         staticRef = Main::printBook;
 
-        System.out.println("Type 1 (static — Main::printBook):");
+        System.out.println("Type 1 (static - Main::printBook):");
         staticRef.accept(catalog.get(FIRST_BOOK_INDEX));
 
-        // Type 2 — Instance on a specific object: extraLibrary::addBook
+        // Type 2 - Instance on a specific object: extraLibrary::addBook
         final List<ca.bcit.comp2522.code.Book> emptyList;
         final ca.bcit.comp2522.code.Library extraLibrary;
         final Consumer<ca.bcit.comp2522.code.Book> instanceRef;
 
-        emptyList    = new ArrayList<>();
+        emptyList = new ArrayList<>();
         extraLibrary = new ca.bcit.comp2522.code.Library("Extra Library", emptyList);
-        instanceRef  = extraLibrary::addBook;
+        instanceRef = extraLibrary::addBook;
 
         instanceRef.accept(catalog.get(FIRST_BOOK_INDEX));
-        System.out.println("\nType 2 (instance on specific object — extraLibrary::addBook):");
+        System.out.println("\nType 2 (instance on specific object - extraLibrary::addBook):");
         System.out.println("Extra library size after add: " + extraLibrary.getCatalog().size());
 
-        // Type 3 — Instance on any object of a type: Book::getTitle
+        // Type 3 - Instance on any object of a type: Book::getTitle
         final Function<ca.bcit.comp2522.code.Book, String> typeRef;
         typeRef = ca.bcit.comp2522.code.Book::getTitle;
 
-        System.out.println("\nType 3 (instance on any object of a type — Book::getTitle):");
+        System.out.println("\nType 3 (instance on any object of a type - Book::getTitle):");
         System.out.println(typeRef.apply(catalog.get(FIRST_BOOK_INDEX)));
 
-        // Type 4 — Constructor reference: Book::new (copy constructor)
+        // Type 4 - Constructor reference: Book::new (copy constructor)
         final Function<ca.bcit.comp2522.code.Book, ca.bcit.comp2522.code.Book> constructorRef;
         final ca.bcit.comp2522.code.Book copiedBook;
 
         constructorRef = ca.bcit.comp2522.code.Book::new;
-        copiedBook     = constructorRef.apply(catalog.get(FIRST_BOOK_INDEX));
+        copiedBook = constructorRef.apply(catalog.get(FIRST_BOOK_INDEX));
 
-        System.out.println("\nType 4 (constructor reference — Book::new):");
+        System.out.println("\nType 4 (constructor reference - Book::new):");
         System.out.println("Copy is not null: " + (copiedBook != null));
         System.out.println("Copy: " + copiedBook);
 
-        // ════════════════════════════════════════════════════════════════
-        // Task 2 — Method References with forEach
-        // ════════════════════════════════════════════════════════════════
+        // Task 2 - Method References with forEach
         System.out.println("\nTask 2: Method References with forEach");
         System.out.println(SEPARATOR);
 
@@ -177,7 +171,7 @@ public final class Main
         final Consumer<String>         printLine;
 
         toUpperCase = String::toUpperCase;
-        printLine   = System.out::println;
+        printLine = System.out::println;
 
         System.out.println("\nTitles in uppercase:");
         for(final ca.bcit.comp2522.code.Book book : catalog)
@@ -185,9 +179,7 @@ public final class Main
             printLine.accept(toUpperCase.apply(book.getTitle()));
         }
 
-        // ════════════════════════════════════════════════════════════════
-        // Task 3 — Shelf<T> Generic Container
-        // ════════════════════════════════════════════════════════════════
+        // Task 3 - Shelf<T> Generic Container
         System.out.println("\nTask 3: Shelf<T> Generic Container");
         System.out.println(SEPARATOR);
 
@@ -217,9 +209,7 @@ public final class Main
         System.out.println("  Smallest : " + titleShelf.getSmallest());
         System.out.println("  Largest  : " + titleShelf.getLargest());
 
-        // ════════════════════════════════════════════════════════════════
-        // Task 4 — printAll Wildcard Utility
-        // ════════════════════════════════════════════════════════════════
+        // Task 4 - printAll Wildcard Utility
         System.out.println("\nTask 4: printAll Wildcard Utility");
         System.out.println(SEPARATOR);
 
@@ -230,13 +220,11 @@ public final class Main
         System.out.println("\nGenres via printAll:");
         printAll(catalog, b -> System.out.println("  " + b.getGenre()));
 
-        // ════════════════════════════════════════════════════════════════
-        // Task 5 — LibraryStats Static Nested Class
-        // ════════════════════════════════════════════════════════════════
+        // Task 5 - LibraryStats Static Nested Class
         System.out.println("\nTask 5: LibraryStats Static Nested Class");
         System.out.println(SEPARATOR);
 
-        // Static — no Library instance needed
+        // Static - no Library instance needed
         final ca.bcit.comp2522.code.Library.LibraryStats stats;
         stats = new ca.bcit.comp2522.code.Library.LibraryStats();
 
@@ -249,28 +237,22 @@ public final class Main
         System.out.println("Average pages      : " +
                 stats.averagePageCount(catalog));
 
-        // ════════════════════════════════════════════════════════════════
-        // Task 6 — Librarian Non-Static Inner Class
-        // ════════════════════════════════════════════════════════════════
+        // Task 6 - Librarian Non-Static Inner Class
         System.out.println("\nTask 6: Librarian Non-Static Inner Class");
         System.out.println(SEPARATOR);
 
-        // Non-static — must be created via an existing Library instance
+        // Non-static - must be created via an existing Library instance
         final ca.bcit.comp2522.code.Library.Librarian librarian;
         librarian = library.new Librarian("Alex");
         librarian.recommend();
 
-        // ════════════════════════════════════════════════════════════════
-        // Task 7 — CheckoutReceipt Local Inner Class
-        // ════════════════════════════════════════════════════════════════
+        // Task 7 - CheckoutReceipt Local Inner Class
         System.out.println("\nTask 7: CheckoutReceipt Local Inner Class");
         System.out.println(SEPARATOR);
 
         processCheckout(library, catalog.get(FIRST_BOOK_INDEX));
 
-        // ════════════════════════════════════════════════════════════════
-        // Task 8 — Anonymous Inner Class Comparator
-        // ════════════════════════════════════════════════════════════════
+        // Task 8 - Anonymous Inner Class Comparator
         System.out.println("\nTask 8: Anonymous Inner Class Comparator");
         System.out.println(SEPARATOR);
 
